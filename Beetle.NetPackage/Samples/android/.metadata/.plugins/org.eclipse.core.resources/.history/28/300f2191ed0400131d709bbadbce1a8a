@@ -1,0 +1,5 @@
+package beetle.netpackage;
+
+public interface IDataReader {
+
+}

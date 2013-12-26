@@ -1,0 +1,8 @@
+package beetle.netpackage;
+
+public interface IDataReader {
+	int Read(byte[] data);
+	int Read(byte[] data,int off,int len);
+	boolean ReadBoolean();
+	byte ReadByte(); 
+}

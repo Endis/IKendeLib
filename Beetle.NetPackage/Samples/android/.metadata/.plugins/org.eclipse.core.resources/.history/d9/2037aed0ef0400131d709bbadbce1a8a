@@ -1,0 +1,86 @@
+package beetle.netpackage;
+
+import java.io.DataOutputStream;
+
+public class DataWriter implements IDataWriter {
+
+	public DataWriter(DataOutputStream stream)
+	{
+		mStream = stream;
+	}
+	
+	private DataOutputStream mStream;
+	
+	@Override
+	public DataOutputStream GetStream() {
+		// TODO Auto-generated method stub
+		return mStream;
+	}
+
+	@Override
+	public void Write(byte[] data, int off, int len) {
+		mStream.write(data, off, len)
+		
+	}
+
+	@Override
+	public void Write(boolean value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Write(byte value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Write(char value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Write(double value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Write(float value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Write(int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Write(short value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Write(long value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void WriteUTF(String value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Write(IMessage msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

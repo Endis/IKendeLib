@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\Beetle.NetPackage">
+      <UniqueIdentifier>{7e052453-ecb6-41ff-80a8-9c0446b27c2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Beetle.NetPackage">
+      <UniqueIdentifier>{babe7846-8e9e-4460-ad20-c463c47f14e7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferStream.h">
+      <Filter>头文件\Beetle.NetPackage</Filter>
+    </ClInclude>
+    <ClInclude Include="Endian.h">
+      <Filter>头文件\Beetle.NetPackage</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteArrayReader.h">
+      <Filter>头文件\Beetle.NetPackage</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteArrayWriter.h">
+      <Filter>头文件\Beetle.NetPackage</Filter>
+    </ClInclude>
+    <ClInclude Include="INetClientHandler.h">
+      <Filter>头文件\Beetle.NetPackage</Filter>
+    </ClInclude>
+    <ClInclude Include="IMessage.h">
+      <Filter>头文件\Beetle.NetPackage</Filter>
+    </ClInclude>
+    <ClInclude Include="Package.h">
+      <Filter>头文件\Beetle.NetPackage</Filter>
+    </ClInclude>
+    <ClInclude Include="NetClient.h">
+      <Filter>头文件\Beetle.NetPackage</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferStream.cpp">
+      <Filter>源文件\Beetle.NetPackage</Filter>
+    </ClCompile>
+    <ClCompile Include="ByteArrayReader.cpp">
+      <Filter>源文件\Beetle.NetPackage</Filter>
+    </ClCompile>
+    <ClCompile Include="ByteArrayWriter.cpp">
+      <Filter>源文件\Beetle.NetPackage</Filter>
+    </ClCompile>
+    <ClCompile Include="Package.cpp">
+      <Filter>源文件\Beetle.NetPackage</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckSize.cpp">
+      <Filter>头文件\Beetle.NetPackage</Filter>
+    </ClCompile>
+    <ClCompile Include="NetClient.cpp">
+      <Filter>源文件\Beetle.NetPackage</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="app.ico">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

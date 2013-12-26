@@ -1,0 +1,16 @@
+package beetle.netpackage;
+
+public interface IDataWriter {
+	
+	void Write(byte[] data,int off,int len);
+	void Write(boolean value);
+	void Write(byte value);
+	void Write(char value);
+	void Write(double value) ;
+	void Write(float value);
+	void Write(int value);
+	void Write(short value);
+	void Write(long value);
+	void WriteUTF(String value);
+	void Write(IMessage msg);
+}

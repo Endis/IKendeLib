@@ -1,0 +1,186 @@
+package beetle.netpackage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.util.concurrent.atomic.AtomicReference;
+
+/**
+ * Copyright © henryfan 2013
+ * Created by henryfan on 13-7-30.
+ * homepage:www.ikende.com
+ * email:henryfan@msn.com
+ */
+public abstract class Package {
+
+    private boolean mLoading = false;
+
+    private CheckSize mCheckSize = null;
+
+    private ByteArrayOutputStream mStream =null;
+
+   public  IDataReceive ReceiveHandler;
+
+    public  void Import(byte[] data, int start, int count)
+    {
+
+        if (mCheckSize == null)
+        {
+            mCheckSize = new CheckSize();
+
+        }
+        while (count > 0)
+        {
+            if (!mLoading)
+            {
+                mCheckSize.Reset();
+                mStream = new ByteArrayOutputStream();
+                mLoading = true;
+            }
+            if (mCheckSize.Length == -1)
+            {
+                while (count > 0 && mCheckSize.Length == -1)
+                {
+                    mCheckSize.Import(data[start]);
+                    start++;
+                    count--;
+                }
+            }
+            else
+            {
+                AtomicReference<Integer> rstart = new AtomicReference<Integer>(start);
+                AtomicReference<Integer> rcount = new AtomicReference<Integer>(count);
+                if (OnImport(data, rstart, rcount))
+                {
+                    mLoading = false;
+                    if (ReceiveHandler != null)
+                    {
+                        byte[] buffer = mStream.toByteArray();
+                        ByteArrayInputStream inputStream = new ByteArrayInputStream(buffer);
+                        ReceiveHandler.Receive(inputStream);
+                    }
+                }
+                count= rcount.get();
+                start = rstart.get();
+            }
+        }
+    }
+
+    private boolean OnImport(byte[] data, AtomicReference<Integer> start, AtomicReference<Integer>  count)
+    {
+        if (count.get() >= mCheckSize.Length)
+        {
+            mStream.write(data, start.get(), mCheckSize.Length);
+            start.set(start.get() + mCheckSize.Length);
+            count.set(count.get()- mCheckSize.Length);
+            return true;
+        }
+        else
+        {
+            mStream.write(data, start.get(), count.get());
+            start.set(start.get() + mCheckSize.Length);
+            mCheckSize.Length -= count.get();
+            count.set(0);
+            return false;
+        }
+
+    }
+    protected abstract void WriteMessageType(IDataWriter writer,IMessage message) throws Exception;
+
+    protected abstract IMessage GetMessage(IDataReader reader) throws Exception;
+    
+    public IMessage SendCast(Object msg) throws Exception
+    {
+    	return (IMessage) msg;
+    }
+    
+    public Object ReceiveCast(IMessage msg) throws Exception
+    {
+    	return msg;
+    }
+
+    public IMessage FromStream(DataInputStream reader) throws Exception
+    {
+        try
+        {
+        	IDataReader dr = new DataReader(reader);
+            IMessage msg = GetMessage(dr);
+            msg.Load(dr);
+            return msg;
+        }
+        catch (Exception e_)
+        {
+            throw new Exception("read message error!",e_);
+        }
+    }
+
+    public  byte[] GetMessageData(IMessage msg) throws Exception
+    {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        DataOutputStream writer = new DataOutputStream(stream);
+        writer.writeInt(0);
+        WriteMessageType(writer, msg);
+        msg.Save(writer);
+        byte[] result = stream.toByteArray();
+        byte[] lenData = intToByteArray(result.length-4);
+        for(int i=0;i<lenData.length;i++)
+        {
+            result[i] = lenData[i];
+        }
+        return result;
+    }
+
+    public void Reset()
+    {
+        mCheckSize = null;
+        mLoading = false;
+    }
+
+    class CheckSize
+    {
+        public int Length = -1;
+
+        private int mIndex;
+
+        public byte[] LengthData = new byte[4];
+
+        public void Import(byte value)
+        {
+            LengthData[mIndex] = value;
+            if (mIndex == 3)
+            {
+                Length = byteArrayToInt(LengthData);
+            }
+            else
+            {
+                mIndex++;
+            }
+        }
+
+        public void Reset()
+        {
+            Length = -1;
+            mIndex = 0;
+        }
+    }
+    public static byte[] intToByteArray(int i) {
+        byte[] result = new byte[4];
+        
+        result[0] = (byte)((i >> 24) & 0xFF);
+        result[1] = (byte)((i >> 16) & 0xFF);
+        result[2] = (byte)((i >> 8) & 0xFF);
+        result[3] = (byte)(i & 0xFF);
+        return result;
+    }
+
+    
+    public static int byteArrayToInt(byte[] bytes) {
+        int value= 0;
+       
+        for (int i = 0; i < 4; i++) {
+            int shift= (4 - 1 - i) * 8;
+            value +=(bytes[i] & 0x000000FF) << shift;
+        }
+        return value;
+    }
+}

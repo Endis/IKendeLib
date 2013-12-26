@@ -1,0 +1,93 @@
+package beetle.netpackage;
+
+import java.io.DataInputStream;
+import java.io.IOException;
+
+public class DataReader implements IDataReader {
+
+	public DataReader(DataInputStream stream)
+	{
+		mStream = stream;
+	}
+	
+	private DataInputStream mStream;
+	
+	@Override
+	public DataInputStream GetStream() {
+		// TODO Auto-generated method stub
+		return mStream;
+	}
+
+	@Override
+	public int Read(byte[] data) throws IOException {
+		// TODO Auto-generated method stub
+		return mStream.read(data);
+	}
+
+	@Override
+	public int Read(byte[] data, int off, int len) throws IOException {
+		// TODO Auto-generated method stub
+		return mStream.read(data, offset, len);
+	}
+
+	@Override
+	public boolean ReadBoolean() throws IOException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public byte ReadByte() throws IOException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public char ReadChar() throws IOException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double ReadDouble() throws IOException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float ReadFloat() throws IOException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int ReadInt() throws IOException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public short ReadShort() throws IOException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long ReadLong() throws IOException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String ReadUTF() throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void Read(IMessage msg) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

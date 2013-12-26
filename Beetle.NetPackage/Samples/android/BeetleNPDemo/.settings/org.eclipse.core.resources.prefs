@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//src/beetle/netpackage/DataReader.java=UTF-8
+encoding//src/beetle/netpackage/DataWriter.java=UTF-8
+encoding//src/beetle/netpackage/IDataReader.java=UTF-8
+encoding//src/beetle/netpackage/IDataReceive.java=UTF-8
+encoding//src/beetle/netpackage/IDataWriter.java=UTF-8
+encoding//src/beetle/netpackage/IMessage.java=UTF-8
+encoding//src/beetle/netpackage/INetClientHandler.java=UTF-8
+encoding//src/beetle/netpackage/NetClient.java=UTF-8
+encoding//src/beetle/netpackage/Package.java=UTF-8

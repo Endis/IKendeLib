@@ -1,0 +1,4 @@
+INDEX VERSION 1.126+D:\BeetlePackage\Local\Samples\android\.metadata\.plugins\org.eclipse.jdt.core
+4288764691.index
+1503693758.index
+4248827196.index
