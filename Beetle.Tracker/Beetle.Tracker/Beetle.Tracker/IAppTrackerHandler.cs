@@ -14,7 +14,9 @@ namespace Beetle.Tracker
             set;
         }
 
-         void Register(IProperties properties);
+        AppHost GetHost(IProperties properties);
+
+         IProperties Register(IProperties properties);
 
          object GetInfo(IProperties properties);
     }

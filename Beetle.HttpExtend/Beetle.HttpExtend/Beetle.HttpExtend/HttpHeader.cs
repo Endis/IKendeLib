@@ -195,6 +195,12 @@ namespace Beetle.HttpExtend
             set
             {
                 mAction = value;
+                int index = mAction.IndexOf(' ');
+                if (index > 0)
+                {
+                    int length = mAction.Length - index - 1;
+                    ActionDetail = mAction.Substring(index + 1, length);
+                }
                 string[] values = mAction.Split(' ');
                 if (values.Length > 0)
                     mRequestType = values[0];
@@ -204,6 +210,12 @@ namespace Beetle.HttpExtend
                     mHttpVersion = values[2];
 
             }
+        }
+
+        public string ActionDetail
+        {
+            get;
+            set;
         }
 
         public string HttpVersion

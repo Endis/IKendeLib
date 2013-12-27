@@ -7,7 +7,7 @@ namespace Beetle.Tracker
 {
     public interface IInfoFormater
     {
-        object FromString(string value);
+        object FromString(Type type,string value);
         string ToStringValue(object obj);
     }
 }

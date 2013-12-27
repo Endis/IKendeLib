@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beetle.Tracker", "Beetle.Tr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beetle.HttpExtend", "..\..\Beetle.HttpExtend\Beetle.HttpExtend\Beetle.HttpExtend\Beetle.HttpExtend.csproj", "{F5133E4E-9744-44F4-AC70-CBB90B7C5352}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beetle.Tracker.TestImpl", "Beetle.Tracker.TestImpl\Beetle.Tracker.TestImpl.csproj", "{CEDCC7E7-2D40-4D95-ABAB-3B8352587898}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{F5133E4E-9744-44F4-AC70-CBB90B7C5352}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5133E4E-9744-44F4-AC70-CBB90B7C5352}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5133E4E-9744-44F4-AC70-CBB90B7C5352}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEDCC7E7-2D40-4D95-ABAB-3B8352587898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEDCC7E7-2D40-4D95-ABAB-3B8352587898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEDCC7E7-2D40-4D95-ABAB-3B8352587898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEDCC7E7-2D40-4D95-ABAB-3B8352587898}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

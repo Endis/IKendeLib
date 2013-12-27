@@ -10,6 +10,24 @@ namespace Beetle.Tracker
         where P : IProperties, new()
     {
 
+        public AppToTracker(string section)
+        {
+            TackerSection ts = (TackerSection)System.Configuration.ConfigurationManager.GetSection(section);
+            if (ts == null)
+                throw new TrackerException(string.Format("{0} section Notfound!",section));
+            Formater = new T();
+            List<TrackerHost> hosts = new List<TrackerHost>();
+            foreach (TackerHostConf item in ts.Hosts)
+            {
+                hosts.Add(new TrackerHost { IPAddress= item.Host,Port= item.Port });
+
+            }
+            mHosts = hosts.ToArray();
+            mTrackTime = 1000;
+            mTimer = new System.Threading.Timer(OnTarck, null, mTrackTime, mTrackTime);
+            mAppName = ts.AppName;
+        }
+
         public AppToTracker(string appName, params TrackerHost[] hosts)
         {
             Formater = new T();
@@ -78,7 +96,7 @@ namespace Beetle.Tracker
                                 HttpExtend.HttpHeader result = connection.Send<HttpExtend.HttpHeader>(command);
                                 if (result.RequestType != "200")
                                 {
-                                    Utils.Error<AppToTracker<T, P>>("Register Track {0} Error {1}", item.IPAddress,result.Url);
+                                    Utils.Error<AppToTracker<T, P>>("Register Track {0} Error {1}", item.IPAddress,result.ActionDetail);
                                 }
                             }
                         }
@@ -129,7 +147,7 @@ namespace Beetle.Tracker
                                         using (System.IO.StreamReader reader
                                             = new System.IO.StreamReader(stream, Encoding.UTF8))
                                         {
-                                            TrackerInfo = Formater.FromString(reader.ReadToEnd());
+                                            TrackerInfo = Formater.FromString(Type.GetType(result["INFO-TYPE"]), reader.ReadToEnd());
                                             return;
                                         }
                                     }
@@ -140,7 +158,7 @@ namespace Beetle.Tracker
                                 if (result.RequestType == "500")
                                 {
                                     Utils.Error<AppToTracker<T, P>>("{2} Get Track {0} info 500 error {1}", item.IPAddress,
-                                        result.Url, mAppName);
+                                        result.ActionDetail, mAppName);
                                 }
                             }
                         }

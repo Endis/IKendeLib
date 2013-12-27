@@ -24,7 +24,7 @@ namespace Beetle.Tracker
             HttpExtend.HttpHeader request = Protocol.Get(app, properties);
             HttpExtend.HttpHeader result = mNode.Send<HttpExtend.HttpHeader>(request);
             if (result.RequestType == "500")
-                throw new Exception(result.Url);
+                throw new Exception(result.ActionDetail);
             return new AppHost { Host=result["Host"],Port=int.Parse(result["Port"]) };
         }
     }

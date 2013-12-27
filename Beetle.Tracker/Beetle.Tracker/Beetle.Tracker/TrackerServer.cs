@@ -88,17 +88,82 @@ namespace Beetle.Tracker
 
         private void OnRegister(Beetle.IChannel channel, string appname, IProperties properties)
         {
-
+            IAppTrackerHandler appHandler = GetTackerHandler(appname);
+           
+            if (appHandler == null)
+            {
+                HttpExtend.HttpHeader result = new HttpExtend.HttpHeader();
+                result.Action = "500 " + string.Format("{0} Tracker Handler Notfound", appname);
+                channel.Send(result);
+            }
+            else
+            {
+               
+               IProperties ips = appHandler.Register(properties);
+               HttpExtend.HttpHeader result = Protocol.GetResponse(ips);
+               result.Action = "200";
+               channel.Send(result);
+            }
+            
         }
 
         private void OnGetInfo(Beetle.IChannel channel, string appname, IProperties properties)
         {
+            IAppTrackerHandler appHandler = GetTackerHandler(appname);
 
+            if (appHandler == null)
+            {
+                HttpExtend.HttpHeader result = new HttpExtend.HttpHeader();
+                result.Action = "500 " + string.Format("{0} Tracker Handler Notfound", appname);
+                channel.Send(result);
+            }
+            else
+            {
+                object info = appHandler.GetInfo(properties);
+                byte[] data = Encoding.UTF8.GetBytes( appHandler.Formater.ToStringValue(info));
+                HttpExtend.HttpHeader result = new HttpExtend.HttpHeader();
+                result.Action = "200";
+                result.Length = data.Length;
+                result["INFO-TYPE"] = info.GetType().FullName;
+                channel.Send(result);
+                HttpExtend.BytesReader reader = new HttpExtend.BytesReader(data, 0, data.Length);
+                while (reader.Read())
+                {
+                    HttpExtend.HttpBody body = HttpExtend.HttpPacket.InstanceBodyData();
+                    reader.ReadTo(body);
+                    channel.Send(body);
+                }
+            }
         }
 
         private void OnGet(Beetle.IChannel channel, string appname, IProperties properties)
         {
+            IAppTrackerHandler appHandler = GetTackerHandler(appname);
 
+            if (appHandler == null)
+            {
+                HttpExtend.HttpHeader result = new HttpExtend.HttpHeader();
+                result.Action = "500 " + string.Format("{0} Tracker Handler Notfound", appname);
+                channel.Send(result);
+            }
+            else
+            {
+                AppHost apphost = appHandler.GetHost(properties);
+                if (apphost == null)
+                {
+                    HttpExtend.HttpHeader result = new HttpExtend.HttpHeader();
+                    result.Action = "500 App Host Notfound!";
+                    channel.Send(result);
+                }
+                else
+                {
+                    HttpExtend.HttpHeader result = new HttpExtend.HttpHeader();
+                    result.Action = "200";
+                    result["Host"] = apphost.Host;
+                    result["Port"] = apphost.Port.ToString();
+                    channel.Send(result);
+                }
+            }
         }
 
 
