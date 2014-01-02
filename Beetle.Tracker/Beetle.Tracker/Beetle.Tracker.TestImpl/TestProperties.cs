@@ -52,16 +52,5 @@ namespace Beetle.Tracker.TestImpl
             }
             
         }
-        public string ID
-        {
-            get
-            {
-                return this["ID"];
-            }
-            set
-            {
-                this["ID"] = value;
-            }
-        }
     }
 }

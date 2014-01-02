@@ -17,6 +17,7 @@ namespace Beetle.Tracker
                     if (type != null)
                     {
                         mAppHandlers[conf.Name] = (IAppTrackerHandler)Activator.CreateInstance(type);
+                        Utils.GetLog<TrackerServer>().InfoFormat("Load {0} AppTrackerHandler {1}", conf.Name, type);
                     }
                     else
                     {

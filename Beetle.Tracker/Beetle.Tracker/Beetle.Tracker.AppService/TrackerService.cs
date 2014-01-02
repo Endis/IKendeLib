@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Beetle.Tracker.AppService
 {
-    public partial class TrackerService : ServiceBase
+    partial class TrackerService : ServiceBase
     {
         public TrackerService()
         {
@@ -18,10 +18,12 @@ namespace Beetle.Tracker.AppService
 
         protected override void OnStart(string[] args)
         {
+            // TODO: 在此处添加代码以启动服务。
         }
 
         protected override void OnStop()
         {
+            // TODO: 在此处添加代码以执行停止服务所需的关闭操作。
         }
     }
 }

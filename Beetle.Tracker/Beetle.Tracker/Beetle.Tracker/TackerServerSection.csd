@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<configurationSectionModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="d283e446-3fc8-4638-a81f-7d0b5a0247a3" namespace="Beetle.Tracker" xmlSchemaNamespace="urn:Beetle.Tracker" assemblyName="Beetle.Tracker" xmlns="http://schemas.microsoft.com/dsltools/ConfigurationSectionDesigner">
+<configurationSectionModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="d283e446-3fc8-4638-a81f-7d0b5a0247a3" namespace="Beetle.Tracker" xmlSchemaNamespace="urn:Beetle.Tracker" xmlns="http://schemas.microsoft.com/dsltools/ConfigurationSectionDesigner">
   <typeDefinitions>
     <externalType name="String" namespace="System" />
     <externalType name="Boolean" namespace="System" />
@@ -12,6 +12,18 @@
   </typeDefinitions>
   <configurationElements>
     <configurationSection name="TrackerServerSection" codeGenOptions="Singleton, XmlnsProperty" xmlSectionName="trackerServerSection">
+      <attributeProperties>
+        <attributeProperty name="Host" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="host" isReadOnly="false">
+          <type>
+            <externalTypeMoniker name="/d283e446-3fc8-4638-a81f-7d0b5a0247a3/String" />
+          </type>
+        </attributeProperty>
+        <attributeProperty name="Port" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="port" isReadOnly="false" defaultValue="10028">
+          <type>
+            <externalTypeMoniker name="/d283e446-3fc8-4638-a81f-7d0b5a0247a3/Int32" />
+          </type>
+        </attributeProperty>
+      </attributeProperties>
       <elementProperties>
         <elementProperty name="Trackers" isRequired="true" isKey="false" isDefaultCollection="false" xmlName="trackers" isReadOnly="false">
           <type>

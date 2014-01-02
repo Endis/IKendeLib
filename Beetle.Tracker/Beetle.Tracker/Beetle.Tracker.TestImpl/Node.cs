@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Beetle.Tracker.TestImpl
+{
+    public class Node
+    {
+        public string Name { get; set; }
+
+        public string Host { get; set; }
+
+        public string Port { get; set; }
+
+        public DateTime LastTrackTime
+        {
+            get;
+            set;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() == typeof(string))
+                return Name.Equals(obj.ToString());
+            return Name.Equals(((Node)obj).Name);
+        }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
+    }
+}

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Beetle.Tracker
 {
-    class Utils
+    public class Utils
     {
         static Utils()
         {

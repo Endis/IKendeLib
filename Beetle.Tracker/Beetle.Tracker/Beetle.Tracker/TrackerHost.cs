@@ -26,7 +26,7 @@ namespace Beetle.Tracker
             {
                 if (mClient == null)
                 {
-                    mClient = new Clients.TcpSyncNode(IPAddress, Port, 10);
+                    mClient = new Clients.TcpSyncNode(IPAddress, Port, 2);
                     
                 }
                 return mClient;

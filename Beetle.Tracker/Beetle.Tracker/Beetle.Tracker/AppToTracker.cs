@@ -23,6 +23,10 @@ namespace Beetle.Tracker
 
             }
             mHosts = hosts.ToArray();
+            foreach (TrackerHost item in mHosts)
+            {
+                item.Client.Connect<Beetle.Clients.TcpSyncChannel<HttpExtend.HttpPacket>>();
+            }
             mTrackTime = 1000;
             mTimer = new System.Threading.Timer(OnTarck, null, mTrackTime, mTrackTime);
             mAppName = ts.AppName;
