@@ -33,7 +33,7 @@ namespace Beetle.HttpExtend
             writer.Channel["BODY_COMPLETED"] = Eof;
         }
 
-        private int mIsDisposed = 0;
+       
 
         public void Dispose()
         {

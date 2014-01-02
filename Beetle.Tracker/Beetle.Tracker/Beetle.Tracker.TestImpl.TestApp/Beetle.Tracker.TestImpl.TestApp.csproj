@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Beetle">
+      <HintPath>..\..\..\BeetleLib\4.0\Beetle.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +46,19 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Beetle.Tracker.TestImpl\Beetle.Tracker.TestImpl.csproj">
+      <Project>{cedcc7e7-2d40-4d95-abab-3b8352587898}</Project>
+      <Name>Beetle.Tracker.TestImpl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beetle.Tracker\Beetle.Tracker.csproj">
+      <Project>{f2573633-29bc-4971-a94e-9d5d52ce9add}</Project>
+      <Name>Beetle.Tracker</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

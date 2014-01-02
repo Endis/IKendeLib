@@ -56,11 +56,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IAppToTracker.cs" />
     <Compile Include="Protocol.cs" />
-    <Compile Include="TackerSection.csd.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TackerSection.csd</DependentUpon>
-    </Compile>
     <Compile Include="TackerServerSection.csd.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -69,6 +64,11 @@
     <Compile Include="TrackerClient.cs" />
     <Compile Include="TrackerException.cs" />
     <Compile Include="TrackerHost.cs" />
+    <Compile Include="TrackerSection1.csd.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrackerSection.csd</DependentUpon>
+    </Compile>
     <Compile Include="TrackerServer.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
@@ -82,20 +82,6 @@
     <Content Include="Protocol.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="TackerSection.csd">
-      <Generator>CsdFileGenerator</Generator>
-      <LastGenOutput>TackerSection.csd.cs</LastGenOutput>
-    </None>
-    <None Include="TackerSection.csd.config">
-      <DependentUpon>TackerSection.csd</DependentUpon>
-    </None>
-    <None Include="TackerSection.csd.diagram">
-      <DependentUpon>TackerSection.csd</DependentUpon>
-    </None>
-    <None Include="TackerSection.csd.xsd">
-      <DependentUpon>TackerSection.csd</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="TackerServerSection.csd">
       <Generator>CsdFileGenerator</Generator>
       <LastGenOutput>TackerServerSection.csd.cs</LastGenOutput>
@@ -108,6 +94,17 @@
     </None>
     <None Include="TackerServerSection.csd.xsd">
       <DependentUpon>TackerServerSection.csd</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TrackerSection.csd">
+      <Generator>CsdFileGenerator</Generator>
+      <LastGenOutput>TrackerSection1.csd.cs</LastGenOutput>
+    </None>
+    <None Include="TrackerSection.csd.config">
+      <DependentUpon>TrackerSection.csd</DependentUpon>
+    </None>
+    <None Include="TrackerSection.csd.xsd">
+      <DependentUpon>TrackerSection.csd</DependentUpon>
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

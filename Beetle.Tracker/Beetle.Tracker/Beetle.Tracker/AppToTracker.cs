@@ -12,12 +12,12 @@ namespace Beetle.Tracker
 
         public AppToTracker(string section)
         {
-            TackerSection ts = (TackerSection)System.Configuration.ConfigurationManager.GetSection(section);
+            TrackerSection ts = (TrackerSection)System.Configuration.ConfigurationManager.GetSection(section);
             if (ts == null)
                 throw new TrackerException(string.Format("{0} section Notfound!",section));
             Formater = new T();
             List<TrackerHost> hosts = new List<TrackerHost>();
-            foreach (TackerHostConf item in ts.Hosts)
+            foreach (TrackerHostConf item in ts.Trackers)
             {
                 hosts.Add(new TrackerHost { IPAddress= item.Host,Port= item.Port });
 
@@ -28,10 +28,13 @@ namespace Beetle.Tracker
                 item.Client.Connect<Beetle.Clients.TcpSyncChannel<HttpExtend.HttpPacket>>();
             }
             mTrackTime = 1000;
-            mTimer = new System.Threading.Timer(OnTarck, null, mTrackTime, mTrackTime);
+         
             mAppName = ts.AppName;
         }
-
+        public void Start()
+        {
+            mTimer = new System.Threading.Timer(OnTarck, null, mTrackTime, mTrackTime);
+        }
         public AppToTracker(string appName, params TrackerHost[] hosts)
         {
             Formater = new T();

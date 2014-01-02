@@ -7,8 +7,12 @@ namespace Beetle.Tracker.TestImpl.TestApp
 {
     class Program
     {
+        private static Beetle.Tracker.AppToTracker<TestImpl.TestFormater, TestProperties> mToTracker;
         static void Main(string[] args)
         {
+            mToTracker = new AppToTracker<TestFormater, TestProperties>("trackerSection");
+            mToTracker.Register = (o,e) => { };
+            mToTracker.Start();
         }
     }
 }
