@@ -19,7 +19,9 @@ namespace Beetle.Tracker.TestImpl
         {
             if (obj.GetType() == typeof(string))
                 return Name.Equals(obj.ToString());
-            return Name.Equals(((Group)obj).Name);
+            if(obj is Group)
+                return Name.Equals(((Group)obj).Name);
+            return base.Equals(obj);
         }
 
 

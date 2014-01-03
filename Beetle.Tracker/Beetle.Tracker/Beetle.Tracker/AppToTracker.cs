@@ -27,6 +27,12 @@ namespace Beetle.Tracker
             {
                 item.Client.Connect<Beetle.Clients.TcpSyncChannel<HttpExtend.HttpPacket>>();
             }
+
+            foreach (PropertyConfig p in ts.Properties)
+            {
+                Properties[p.Name] = p.Value;
+            }
+
             mTrackTime = 1000;
          
             mAppName = ts.AppName;
@@ -103,9 +109,13 @@ namespace Beetle.Tracker
                                 HttpExtend.HttpHeader result = connection.Send<HttpExtend.HttpHeader>(command);
                                 if (result.RequestType != "200")
                                 {
-                                    Utils.Error<AppToTracker<T, P>>("Register Track {0} Error {1}", item.IPAddress,result.ActionDetail);
+                                    Utils.Error<AppToTracker<T, P>>("Register Track {0} Error {1}", item.IPAddress, result.ActionDetail);
                                 }
                             }
+                        }
+                        else
+                        {
+                            item.Client.Verify();
                         }
                     }
                     catch (Exception e__)
@@ -151,12 +161,12 @@ namespace Beetle.Tracker
                                     if (body.Eof)
                                     {
                                         stream.Position = 0;
-                                        using (System.IO.StreamReader reader
-                                            = new System.IO.StreamReader(stream, Encoding.UTF8))
-                                        {
-                                            TrackerInfo = Formater.FromString(Type.GetType(result["INFO-TYPE"]), reader.ReadToEnd());
+                                        System.IO.StreamReader reader
+                                            = new System.IO.StreamReader(stream, Encoding.UTF8);
+                                            string type = result[Protocol.HEADER_INFOTYPE];
+                                            TrackerInfo = Formater.FromString(Type.GetType(type), reader.ReadToEnd());
                                             return;
-                                        }
+                                        
                                     }
                                 }
                             }

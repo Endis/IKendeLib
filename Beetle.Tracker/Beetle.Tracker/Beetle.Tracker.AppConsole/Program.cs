@@ -12,6 +12,7 @@ namespace Beetle.Tracker.AppConsole
         static void Main(string[] args)
         {
             Beetle.TcpUtils.Setup("beetle");
+            Utils.GetLog<Tracker.TrackerServer>().Info(Beetle.LICENSE.GetLICENSE());
             mServer = new ServerImpl<HttpExtend.HttpPacket>("Beetle Tracker", new TrackerServer());
             TrackerServerSection config = TrackerServerSection.Instance;
             if (string.IsNullOrEmpty(config.Host))

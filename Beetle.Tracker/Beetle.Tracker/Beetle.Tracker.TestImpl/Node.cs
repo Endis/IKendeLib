@@ -23,7 +23,9 @@ namespace Beetle.Tracker.TestImpl
         {
             if (obj.GetType() == typeof(string))
                 return Name.Equals(obj.ToString());
-            return Name.Equals(((Node)obj).Name);
+            if(obj is Node)
+                return Name.Equals(((Node)obj).Name);
+            return base.Equals(obj);
         }
 
         public override int GetHashCode()

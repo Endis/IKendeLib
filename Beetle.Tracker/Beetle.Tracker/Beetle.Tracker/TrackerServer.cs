@@ -27,6 +27,21 @@ namespace Beetle.Tracker
             }
         }
 
+        private static Dictionary<Type, string> mTypeNames = new Dictionary<Type, string>();
+
+        private static string GetTypeName(Type type)
+        {
+            lock (mTypeNames)
+            {
+                string result = null;
+                if (mTypeNames.TryGetValue(type, out result))
+                    return result;
+                result = type.FullName + "," + type.Assembly.GetName().Name;
+                mTypeNames[type] = result;
+                return result;
+            }
+        }
+
         public void AddApp<T>(string name) where T:IAppTrackerHandler,new()
         {
             mAppHandlers[name] = new T();
@@ -125,7 +140,7 @@ namespace Beetle.Tracker
                 HttpExtend.HttpHeader result = new HttpExtend.HttpHeader();
                 result.Action = "200";
                 result.Length = data.Length;
-                result["INFO-TYPE"] = info.GetType().FullName;
+                result[Protocol.HEADER_INFOTYPE] = GetTypeName(info.GetType());
                 channel.Send(result);
                 HttpExtend.BytesReader reader = new HttpExtend.BytesReader(data, 0, data.Length);
                 while (reader.Read())

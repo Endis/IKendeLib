@@ -58,11 +58,26 @@ namespace Beetle.HttpExtend
                             mHeader = null;
                             mContentLength = null;
                             OnReceiveMessage(mReceiveMessage);
-                               
+                            if (ReadSinglePackage)
+                            {
+                                BufferOffset = start;
+                                BufferCount = count;
+                                break;
+                            }
                         }
                         else
                         {
                             mContentLength = mHeader.Length;
+                            mReceiveMessage.Channel = this.Channel;
+                            mReceiveMessage.Message = mHeader;
+
+                            OnReceiveMessage(mReceiveMessage);
+                            if (ReadSinglePackage)
+                            {
+                                BufferOffset = start;
+                                BufferCount = count;
+                                break;
+                            }
                         }
                     }
                 }
@@ -75,6 +90,7 @@ namespace Beetle.HttpExtend
                     Buffer.BlockCopy(data, start, segment.Array, 0, blockSize);
                     count -= blockSize;
                     mContentLength -= blockSize;
+                    segment.SetInfo(0, blockSize);
                     body.Eof = mContentLength == 0;
                     if (body.Eof)
                     {
@@ -84,6 +100,12 @@ namespace Beetle.HttpExtend
                     mReceiveMessage.Channel = this.Channel;
                     mReceiveMessage.Message = body;
                     OnReceiveMessage(mReceiveMessage);
+                    if (ReadSinglePackage)
+                    {
+                        BufferOffset = start;
+                        BufferCount = count;
+                        break;
+                    }
                 }
             }
 

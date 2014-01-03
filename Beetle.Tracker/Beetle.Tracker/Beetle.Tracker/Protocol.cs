@@ -13,6 +13,8 @@ namespace Beetle.Tracker
 
         public const string COMMAND_GET = "Get";
 
+        public const string HEADER_INFOTYPE = "INFO-TYPE";
+
         public static HttpExtend.HttpHeader Register(string appName,IProperties properties)
         {
             HttpExtend.HttpHeader command = new HttpExtend.HttpHeader();

@@ -12,6 +12,7 @@ namespace Beetle.Tracker.TestImpl
             Formater = new TestFormater();
         }
 
+        private long mCursorIndex = 0;
 
         private List<Group> mGroups = new List<Group>();
 
@@ -60,23 +61,27 @@ namespace Beetle.Tracker.TestImpl
 
         public AppHost GetHost(IProperties properties)
         {
-
-            TestProperties tp = new TestProperties();
-            tp.FromHeaders(properties.ToHeaders());
-            Group group = mGroups.Find(e => e.Name == tp.Group);
-            if (group == null)
-                return null;
-            int i = 0;
-            while (i<group.Nodes.Count)
+            int g = 0;
+            while (g < mGroups.Count)
             {
+                int i = 0;
+                Group group = mGroups[(int)(mCursorIndex % mGroups.Count)];
+                mCursorIndex++;
+                while (i < group.Nodes.Count)
+                {
+
+                    Node node = group.Nodes[(int)(group.CursorIndex % group.Nodes.Count)];
+                    group.CursorIndex++;
+                    if ((DateTime.Now - node.LastTrackTime).TotalSeconds < 5)
+                        return new AppHost { Host = node.Host, Port = int.Parse(node.Port) };
+                    i++;
+                }
                
-                Node node = group.Nodes[(int)(group.CursorIndex % group.Nodes.Count)];
-                group.CursorIndex++;
-                if ((DateTime.Now - node.LastTrackTime).TotalSeconds < 5)
-                    return new AppHost { Host= node.Host,Port= int.Parse( node.Port) };
-                i++;
+                g++;
             }
             return null;
+
+           
         }
     }
 }
