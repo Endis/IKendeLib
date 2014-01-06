@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KGlue", "KGlue\KGlue.csproj", "{77E5415A-3578-428E-BE1A-E267106D5613}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KGlue.App", "KGlue.App\KGlue.App.csproj", "{8CD07A72-9003-43C1-9884-9D7EDDEFBC61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77E5415A-3578-428E-BE1A-E267106D5613}.Debug|x86.ActiveCfg = Debug|x86
+		{77E5415A-3578-428E-BE1A-E267106D5613}.Debug|x86.Build.0 = Debug|x86
+		{77E5415A-3578-428E-BE1A-E267106D5613}.Release|x86.ActiveCfg = Release|x86
+		{77E5415A-3578-428E-BE1A-E267106D5613}.Release|x86.Build.0 = Release|x86
+		{8CD07A72-9003-43C1-9884-9D7EDDEFBC61}.Debug|x86.ActiveCfg = Debug|x86
+		{8CD07A72-9003-43C1-9884-9D7EDDEFBC61}.Debug|x86.Build.0 = Debug|x86
+		{8CD07A72-9003-43C1-9884-9D7EDDEFBC61}.Release|x86.ActiveCfg = Release|x86
+		{8CD07A72-9003-43C1-9884-9D7EDDEFBC61}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

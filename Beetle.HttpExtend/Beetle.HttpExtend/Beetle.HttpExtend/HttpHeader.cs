@@ -36,6 +36,8 @@ namespace Beetle.HttpExtend
 
         private static byte[] mWrap = Encoding.UTF8.GetBytes("\r\n");
 
+        private static byte[] mSpace = Encoding.UTF8.GetBytes(" ");
+
         public HttpHeader()
         {
 
@@ -291,6 +293,7 @@ namespace Beetle.HttpExtend
 
         public bool Import(byte[] data, ref int offset, ref int count)
         {
+            int start=0, length = 0;
             byte[] buffer = mBuffer;
             while (count > 0)
             {
@@ -313,7 +316,15 @@ namespace Beetle.HttpExtend
                         {
                             if (mLastPropertyName != null)
                             {
-                                this[mLastPropertyName] = Encoding.UTF8.GetString(buffer, mStartIndex, mHeaderLength - mStartIndex - 2);
+                                start = mStartIndex;
+                                length = mHeaderLength - mStartIndex - 2;
+                                if (buffer[mStartIndex] == mSpace[0])
+                                {
+                                    start++;
+                                    length--;
+                                }
+                                this[mLastPropertyName] = Encoding.UTF8.GetString(buffer, start,length);
+                               // this[mLastPropertyName] = Encoding.UTF8.GetString(buffer, mStartIndex, mHeaderLength - mStartIndex - 2);
                             }
                             return true;
                         }
@@ -321,7 +332,15 @@ namespace Beetle.HttpExtend
                         {
                             if (mLastPropertyName != null)
                             {
-                                this[mLastPropertyName] = Encoding.UTF8.GetString(buffer, mStartIndex, mHeaderLength - mStartIndex - 2);
+                                start = mStartIndex;
+                                length = mHeaderLength - mStartIndex - 2;
+                                if (buffer[mStartIndex] == mSpace[0])
+                                {
+                                    start++;
+                                    length--;
+                                }
+                                this[mLastPropertyName] = Encoding.UTF8.GetString(buffer, start, length);
+                                //this[mLastPropertyName] = Encoding.UTF8.GetString(buffer, mStartIndex, mHeaderLength - mStartIndex - 2);
                                 mStartIndex = mHeaderLength;
                                 mLastPropertyName = null;
                             }

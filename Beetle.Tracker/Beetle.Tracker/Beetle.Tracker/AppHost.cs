@@ -17,5 +17,13 @@ namespace Beetle.Tracker
             get;
             set;
         }
+        public System.Net.EndPoint ToEndPoint()
+        {
+            return new System.Net.IPEndPoint(System.Net.IPAddress.Parse(Host), Port);
+        }
+        public override string ToString()
+        {
+            return string.Format("{0}:{1}", Host, Port);
+        }
     }
 }

@@ -61,6 +61,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TackerServerSection.csd</DependentUpon>
     </Compile>
+    <Compile Include="TrackerClientSection.csd.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrackerClientSection.csd</DependentUpon>
+    </Compile>
     <Compile Include="TrackerClient.cs" />
     <Compile Include="TrackerException.cs" />
     <Compile Include="TrackerHost.cs" />
@@ -94,6 +99,17 @@
     </None>
     <None Include="TackerServerSection.csd.xsd">
       <DependentUpon>TackerServerSection.csd</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TrackerClientSection.csd">
+      <Generator>CsdFileGenerator</Generator>
+      <LastGenOutput>TrackerClientSection.csd.cs</LastGenOutput>
+    </None>
+    <None Include="TrackerClientSection.csd.config">
+      <DependentUpon>TrackerClientSection.csd</DependentUpon>
+    </None>
+    <None Include="TrackerClientSection.csd.xsd">
+      <DependentUpon>TrackerClientSection.csd</DependentUpon>
       <SubType>Designer</SubType>
     </None>
     <None Include="TrackerSection.csd">
