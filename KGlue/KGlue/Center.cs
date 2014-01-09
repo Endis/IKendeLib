@@ -60,7 +60,7 @@ namespace KGlue
                 {
                     System.IO.Directory.CreateDirectory(pd.CachePath);
                 }
-                mFileWatches.Add(new FileWatche(pd));
+                mFileWatches.Add(new FileWatcher(pd));
             }
             else
             {
@@ -148,7 +148,7 @@ namespace KGlue
             }
             for (int i = 0; i < mFileWatches.Count; i++)
             {
-                ((FileWatche)mFileWatches[i]).Update();
+                ((FileWatcher)mFileWatches[i]).Update();
             }
         }
     }

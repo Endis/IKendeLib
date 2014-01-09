@@ -10,29 +10,19 @@ namespace KGlue.App
         private static KGlue.Center mCenter;
         static void Main(string[] args)
         {
-            mCenter = new Center("appSection");
-            mCenter.LogEvent += (o, e) => {
-                switch (e.Status)
-                {
-                    case ExecutingStatus.Error:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        break;
-                    case ExecutingStatus.Success:
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        break;
-                    case ExecutingStatus.Warning:
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        break;
-                }
-                Console.WriteLine("{0}\t{1}",DateTime.Now, e.Message);
-                if (e.Error != null)
-                {
-                    Console.WriteLine(e.Error.Message);
-                    Console.WriteLine(e.Error.StackTrace);
-                }
-            };
-            mCenter.Start();
+
+            using (Connection client = DFSClien.UP("SFD"))
+            {
+                client.write(data);
+                client.Write(file);
+                client.read();
+                client.readto(file);
+            }
+
+            Upload up = new Upload(data);
+            string file = up.exeute();
             System.Threading.Thread.Sleep(-1);
         }
+        
     }
 }

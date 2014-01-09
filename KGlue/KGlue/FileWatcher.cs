@@ -7,7 +7,7 @@ using System.IO;
 
 namespace KGlue
 {
-    class FileWatche
+    class FileWatcher
     {
         private FileSystemWatcher mWather;
 
@@ -17,7 +17,7 @@ namespace KGlue
 
         private bool mIsChange = false;
 
-        public FileWatche(AdapterDomain domain)
+        public FileWatcher(AdapterDomain domain)
         {
             mDomain = domain;
             mWather = new FileSystemWatcher(domain.FullPath);

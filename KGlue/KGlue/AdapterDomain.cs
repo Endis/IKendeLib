@@ -22,11 +22,13 @@ namespace KGlue
                 return mStatus;
             }
         }
+
         public string[] Args
         {
             get;
             set;
         }
+
         private AppAssembly mDomainAssembly;
 
         private string mFullPath;
@@ -79,7 +81,9 @@ namespace KGlue
             get;
             set;
         }
+
         public bool IsStarting = false;
+
         public bool Start()
         {
             lock (this)
@@ -175,6 +179,7 @@ namespace KGlue
             mStatus = DomainStatus.Stoped;
             CallLogEvent(ExecutingStatus.Warning, null, string.Format("domain [{0}] unload.", this.VirtualName));
         }
+
         public void Stop()
         {
 

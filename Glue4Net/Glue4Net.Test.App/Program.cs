@@ -10,7 +10,7 @@ namespace Glue4Net.Test.App
         static void Main(string[] args)
         {
             DomainAdapter da = new DomainAdapter(@"C:\Users\Administrator\Documents\GitHub\IKendeLib\Glue4Net\Glue4Net.Test.Demo\bin\Debug",
-                "TEST");
+                "TEST",false);
             da.Log = new ConsoleLoger();
             da.Load();
             Demo.ITest test = (Demo.ITest)da.CreateProxyObject("test");

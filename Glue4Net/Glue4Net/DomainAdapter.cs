@@ -9,7 +9,7 @@ namespace Glue4Net
     public class DomainAdapter
     {
 
-        public DomainAdapter(string appPath, string appName)
+        public DomainAdapter(string appPath, string appName,bool updateWatch,params string[] filters)
         {
             if (appPath.LastIndexOf(System.IO.Path.DirectorySeparatorChar) != appPath.Length - 1)
             {
@@ -18,11 +18,24 @@ namespace Glue4Net
             AppPath = appPath;
             CachePath = Path.Combine(AppPath, "_tempdll" + Path.DirectorySeparatorChar);
             AppName = appName;
+            if (updateWatch)
+            {
+                mWatcher = new FileWatcher(appPath, filters);
+                mWatcher.Change += OnChange;
+            }
         }
+
+        private FileWatcher mWatcher;
 
         private AssemblyLoader mLoader;
 
         private AppDomain mAppDomain;
+
+        protected void OnChange(FileWatcher e)
+        {
+            UnLoad();
+            Load();
+        }
 
         public string AppName
         {

@@ -42,6 +42,7 @@
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="DomainAdapter.cs" />
+    <Compile Include="FileWatcher.cs" />
     <Compile Include="IEventLog.cs" />
     <Compile Include="IAppModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
