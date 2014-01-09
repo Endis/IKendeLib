@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compression.Server", "Compression.Server\Compression.Server.csproj", "{B582D96E-6872-4AB4-95AE-9AA20D1AC515}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compression.Client", "Compression.Client\Compression.Client.csproj", "{963CACE9-6599-48A8-95CF-A96C5D3EC480}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B582D96E-6872-4AB4-95AE-9AA20D1AC515}.Debug|x86.ActiveCfg = Debug|x86
+		{B582D96E-6872-4AB4-95AE-9AA20D1AC515}.Debug|x86.Build.0 = Debug|x86
+		{B582D96E-6872-4AB4-95AE-9AA20D1AC515}.Release|x86.ActiveCfg = Release|x86
+		{B582D96E-6872-4AB4-95AE-9AA20D1AC515}.Release|x86.Build.0 = Release|x86
+		{963CACE9-6599-48A8-95CF-A96C5D3EC480}.Debug|x86.ActiveCfg = Debug|x86
+		{963CACE9-6599-48A8-95CF-A96C5D3EC480}.Debug|x86.Build.0 = Debug|x86
+		{963CACE9-6599-48A8-95CF-A96C5D3EC480}.Release|x86.ActiveCfg = Release|x86
+		{963CACE9-6599-48A8-95CF-A96C5D3EC480}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

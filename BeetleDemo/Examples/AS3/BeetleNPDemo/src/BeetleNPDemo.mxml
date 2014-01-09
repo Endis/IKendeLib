@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="windowedapplication1_creationCompleteHandler(event)" activate="windowedapplication1_activateHandler(event)">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import Beetle.NetPackage.NetClient;
+			import Beetle.NetPackage.NetClientHandler;
+			
+			import mx.events.FlexEvent;
+			
+			import org.osmf.layout.AbsoluteLayoutFacet;
+			private var mClient:NetClient;
+
+			protected function windowedapplication1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				mClient = new NetClient("127.0.0.1",9088,new NPPackage(),new NetClientHandler(
+					ClientReceive,ClientError,ClientDisposed,ClientConnected));
+				mClient.SocketEndian = Endian.BIG_ENDIAN;
+				
+			}
+
+			private function ClientReceive(client:NetClient,msg:Object):void
+			{
+				if(msg is Register)
+				{
+					var reg:Register =Register(msg);
+					txtRegTime.text = reg.RegTime.toString();
+				}
+			}
+			
+			private function ClientError(client:NetClient,err:Error):void
+			{
+				txtError.text= err.message;
+			}
+			
+			private function ClientDisposed(client:NetClient):void
+			{
+				txtConnectionStatus.text="disposed!";
+			}
+			
+			private function ClientConnected(client:NetClient):void
+			{
+				txtConnectionStatus.text="connect!";
+			}
+
+			protected function windowedapplication1_activateHandler(event:Event):void
+			{
+				mClient.Connect();
+			}
+
+
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				var reg:Register = new Register();
+				reg.Name = txtName.text;
+				reg.EMail = txtEMail.text;
+				reg.City = txtCity.text;
+				reg.Country = txtCountry.text;
+				reg.RegTime = new Date();
+				mClient.Send(reg);
+			}
+
+		]]>
+	</fx:Script>
+	<s:Panel width="546" height="342" horizontalCenter="0" top="20" title="BeetleNPDemo">
+		<mx:Form horizontalCenter="-2" top="10" width="474">
+			<mx:FormItem label="Name:">
+				<s:TextInput id="txtName"/>
+			</mx:FormItem>
+			<mx:FormItem label="EMail:">
+				<s:TextInput id="txtEMail"/>
+			</mx:FormItem>
+			<mx:FormItem label="City:">
+				<s:TextInput id="txtCity"/>
+			</mx:FormItem>
+			<mx:FormItem label="Country:">
+				<s:TextInput id="txtCountry"/>
+			</mx:FormItem>
+			<mx:FormItem label="RegTime:">
+				<s:Label id="txtRegTime"/>
+			</mx:FormItem>
+			<mx:FormItem>
+				<s:Button label="Register" click="button1_clickHandler(event)"/>
+			</mx:FormItem>
+			<mx:FormItem>
+				<s:Label id="txtError"/>
+			</mx:FormItem>
+			<mx:FormItem>
+				<s:Label id="txtConnectionStatus"/>
+			</mx:FormItem>
+		</mx:Form>
+	</s:Panel>
+</s:WindowedApplication>
