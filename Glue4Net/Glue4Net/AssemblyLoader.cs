@@ -7,13 +7,15 @@ using System.Text;
 
 namespace Glue4Net
 {
-    class AssemblyLoader: MarshalByRefObject
+    class AssemblyLoader : MarshalByRefObject
     {
         private List<string> mRefAssembly = new List<string>();
 
         private List<IAppModule> mModules = new List<IAppModule>();
 
-     
+        private FileCompiler mFileCompiler = new FileCompiler();
+
+        private List<Assembly> mCompilerAssembly = new List<Assembly>();
 
         public AssemblyLoader()
         {
@@ -53,7 +55,11 @@ namespace Glue4Net
             set;
         }
 
-     
+        public bool CompilerFiles
+        {
+            get;
+            set;
+        }
 
         private void AddReference(string referenceToDll)
         {
@@ -65,36 +71,40 @@ namespace Glue4Net
 
         public void LoadAssembly(string path)
         {
-           
-                DirectoryInfo directory = new DirectoryInfo(path);
-                foreach (FileInfo item in directory.GetFiles("*.dll"))
+
+            DirectoryInfo directory = new DirectoryInfo(path);
+            foreach (FileInfo item in directory.GetFiles("*.dll"))
+            {
+                try
                 {
-                    try
+                    string filename = Path.GetFileNameWithoutExtension(item.FullName);
+                    Assembly assembly = Assembly.Load(filename);
+                    AddReference(item.FullName);
+                    foreach (Type type in assembly.GetTypes())
                     {
-                        string filename = Path.GetFileNameWithoutExtension(item.FullName);
-                        Assembly assembly = Assembly.Load(filename);
-                        AddReference(item.FullName);
-                        foreach (Type type in assembly.GetTypes())
+                        if (type.GetInterface("Glue4Net.IAppModule") != null)
                         {
-                            if (type.GetInterface("Glue4Net.IAppModule") != null)
-                            {
-                                mModules.Add((IAppModule)Activator.CreateInstance(type));
-                            }
+                            mModules.Add((IAppModule)Activator.CreateInstance(type));
                         }
                     }
-                       
-                    catch (Exception e_)
-                    {
-                        if (Log != null)
-                            Log.Error("domain [{0}] load {1} assembly error:{3}.", AppName, item.Name,e_.Message);
-                    }
                 }
-              
+
+                catch (Exception e_)
+                {
+                    if (Log != null)
+                        Log.Error("domain [{0}] load {1} assembly error:{3}.", AppName, item.Name, e_.Message);
+                }
+            }
+            if (CompilerFiles)
+            {
+                LoadVB(path);
+                LoadCS(path);
+            }
         }
 
         public void Load()
         {
-          
+
             foreach (IAppModule module in mModules)
             {
                 try
@@ -113,7 +123,7 @@ namespace Glue4Net
 
         public void UnLoad()
         {
-            
+
             foreach (IAppModule module in mModules)
             {
                 try
@@ -125,12 +135,12 @@ namespace Glue4Net
                 catch (Exception e_)
                 {
                     if (Log != null)
-                        Log.Info("{0} App {1} module unload error {2}!", AppName, module.Name,e_.Message);
+                        Log.Info("{0} App {1} module unload error {2}!", AppName, module.Name, e_.Message);
                 }
             }
         }
 
-       
+
 
         private void OnUnLoaderror(object sender, UnhandledExceptionEventArgs e)
         {
@@ -138,9 +148,9 @@ namespace Glue4Net
             if (Log != null)
             {
                 Exception error = (Exception)e.ExceptionObject;
-                Log.Error("{0} UnhandledException error {1} {2}", AppName,error.Message,error.StackTrace);
+                Log.Error("{0} UnhandledException error {1} {2}", AppName, error.Message, error.StackTrace);
             }
-            
+
         }
 
         public object CreateProxyObject(string name)
@@ -161,6 +171,46 @@ namespace Glue4Net
         public void SetValue(string key, object value)
         {
             Context.Current[key] = value;
+        }
+
+        private void LoadVB(string path)
+        {
+            string[] files = System.IO.Directory.GetFiles(path, "*.vb");
+            if (files.Length > 0)
+            {
+                try
+                {
+                    Assembly assembly = mFileCompiler.CreateAssembly(files, mRefAssembly);
+                    mCompilerAssembly.Add(assembly);
+                    if (Log != null)
+                        Log.Info("compiler .cs files success");
+                }
+                catch (Exception e_)
+                {
+                    if (Log != null)
+                        Log.Info("compiler .cs files error {1}", e_.Message);
+                }
+            }
+        }
+
+        private void LoadCS(string path)
+        {
+            string[] files = System.IO.Directory.GetFiles(path, "*.cs");
+            if (files.Length > 0)
+            {
+                try
+                {
+                    Assembly assembly = mFileCompiler.CreateAssembly(files, mRefAssembly);
+                    mCompilerAssembly.Add(assembly);
+                    if (Log != null)
+                        Log.Info("compiler .vb files success");
+                }
+                catch (Exception e_)
+                {
+                    if (Log != null)
+                        Log.Info("compiler .vb files error {1}", e_.Message);
+                }
+            }
         }
 
     }

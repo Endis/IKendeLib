@@ -9,8 +9,9 @@ namespace Glue4Net
     public class DomainAdapter
     {
 
-        public DomainAdapter(string appPath, string appName,bool updateWatch,params string[] filters)
+        public DomainAdapter(string appPath, string appName,DomainArgs args)
         {
+            mArgs = args;
             if (appPath.LastIndexOf(System.IO.Path.DirectorySeparatorChar) != appPath.Length - 1)
             {
                 appPath += System.IO.Path.DirectorySeparatorChar;
@@ -18,12 +19,14 @@ namespace Glue4Net
             AppPath = appPath;
             CachePath = Path.Combine(AppPath, "_tempdll" + Path.DirectorySeparatorChar);
             AppName = appName;
-            if (updateWatch)
+            if (args !=null && args.UpdateWatch)
             {
-                mWatcher = new FileWatcher(appPath, filters);
+                mWatcher = new FileWatcher(appPath, args.WatchFilter);
                 mWatcher.Change += OnChange;
             }
         }
+
+        private DomainArgs mArgs;
 
         private FileWatcher mWatcher;
 
@@ -75,6 +78,8 @@ namespace Glue4Net
                 mLoader = (AssemblyLoader)mAppDomain.CreateInstanceAndUnwrap(
                     loadertype.Assembly.GetName().Name,
                     loadertype.FullName);
+                if (mArgs != null)
+                    mLoader.CompilerFiles = mArgs.Compiler;
                 mLoader.Log = Log;
                 mLoader.AppName = AppName;
                 mLoader.LoadAssembly(AppPath);
