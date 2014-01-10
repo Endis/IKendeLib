@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beetle.Tracker", "Beetle.Tracker\Beetle.Tracker.csproj", "{F2573633-29BC-4971-A94E-9D5D52CE9ADD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beetle.HttpExtend", "..\..\Beetle.HttpExtend\Beetle.HttpExtend\Beetle.HttpExtend\Beetle.HttpExtend.csproj", "{F5133E4E-9744-44F4-AC70-CBB90B7C5352}"
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beetle.Tracker.TestImpl.TestApp", "Beetle.Tracker.TestImpl.TestApp\Beetle.Tracker.TestImpl.TestApp.csproj", "{D8CDD2BE-61D4-492D-B479-0EC46726889F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beetle.Tracker.TestImpl.TestClient", "Beetle.Tracker.TestImpl.TestClient\Beetle.Tracker.TestImpl.TestClient.csproj", "{96215AA2-EE70-4103-885E-6F68CDD9276A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glue4Net", "..\..\Glue4Net\Glue4Net\Glue4Net.csproj", "{B4D38921-4E4F-45A4-8180-B8E51F202650}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,6 +109,16 @@ Global
 		{96215AA2-EE70-4103-885E-6F68CDD9276A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{96215AA2-EE70-4103-885E-6F68CDD9276A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{96215AA2-EE70-4103-885E-6F68CDD9276A}.Release|x86.ActiveCfg = Release|Any CPU
+		{B4D38921-4E4F-45A4-8180-B8E51F202650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4D38921-4E4F-45A4-8180-B8E51F202650}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4D38921-4E4F-45A4-8180-B8E51F202650}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B4D38921-4E4F-45A4-8180-B8E51F202650}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B4D38921-4E4F-45A4-8180-B8E51F202650}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B4D38921-4E4F-45A4-8180-B8E51F202650}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4D38921-4E4F-45A4-8180-B8E51F202650}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4D38921-4E4F-45A4-8180-B8E51F202650}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B4D38921-4E4F-45A4-8180-B8E51F202650}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B4D38921-4E4F-45A4-8180-B8E51F202650}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

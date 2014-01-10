@@ -41,6 +41,9 @@ namespace Beetle.HttpExtend
 
         public override void Import(byte[] data, int start, int count)
         {
+            HttpBody body;
+            int blockSize;
+            ByteArraySegment segment;
             while (count > 0)
             {
                 if (mContentLength == null)
@@ -83,10 +86,10 @@ namespace Beetle.HttpExtend
                 }
                 else
                 {
-                    HttpBody body = InstanceBodyData();
-                    int blockSize = (int)(mContentLength > BODY_BLOCK_SIZE ? BODY_BLOCK_SIZE : mContentLength);
+                    body = InstanceBodyData();
+                    blockSize = (int)(mContentLength > BODY_BLOCK_SIZE ? BODY_BLOCK_SIZE : mContentLength);
                     blockSize = blockSize > count ? count : blockSize;
-                    ByteArraySegment segment = body.Data;
+                    segment = body.Data;
                     Buffer.BlockCopy(data, start, segment.Array, 0, blockSize);
                     count -= blockSize;
                     mContentLength -= blockSize;

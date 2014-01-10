@@ -30,8 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Beetle">
-      <HintPath>..\..\Lib\4.0\Beetle.dll</HintPath>
+    <Reference Include="Beetle, Version=2.7.8.322, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\BeetleLib\4.0\Beetle.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

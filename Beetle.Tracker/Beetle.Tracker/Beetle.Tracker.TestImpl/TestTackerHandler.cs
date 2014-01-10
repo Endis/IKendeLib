@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Beetle.Tracker.TestImpl
 {
-    public class TestTackerHandler : Beetle.Tracker.IAppTrackerHandler
+    public class TestTackerHandler :MarshalByRefObject, Beetle.Tracker.IAppTrackerHandler
     {
         public TestTackerHandler()
         {
@@ -57,6 +57,11 @@ namespace Beetle.Tracker.TestImpl
             if (group == null)
                 return new Group();
             return group;
+        }
+
+        public override object InitializeLifetimeService()
+        {
+            return null;
         }
 
         public AppHost GetHost(IProperties properties)

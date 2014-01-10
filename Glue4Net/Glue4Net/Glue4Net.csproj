@@ -43,6 +43,7 @@
     <Compile Include="Context.cs" />
     <Compile Include="DomainAdapter.cs" />
     <Compile Include="DomainArgs.cs" />
+    <Compile Include="DomainStatus.cs" />
     <Compile Include="FileCompiler.cs" />
     <Compile Include="FileWatcher.cs" />
     <Compile Include="IEventLog.cs" />

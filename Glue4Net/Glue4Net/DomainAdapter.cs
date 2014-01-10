@@ -8,9 +8,10 @@ namespace Glue4Net
 {
     public class DomainAdapter
     {
-
+        
         public DomainAdapter(string appPath, string appName,DomainArgs args)
         {
+            Status = DomainStatus.Stop;
             mArgs = args;
             if (appPath.LastIndexOf(System.IO.Path.DirectorySeparatorChar) != appPath.Length - 1)
             {
@@ -24,6 +25,21 @@ namespace Glue4Net
                 mWatcher = new FileWatcher(appPath, args.WatchFilter);
                 mWatcher.Change += OnChange;
             }
+
+        }
+
+        private System.Collections.Hashtable mProperties = new System.Collections.Hashtable();
+
+        public object this[string key]
+        {
+            get
+            {
+                return mProperties[key];
+            }
+            set
+            {
+                mProperties[key] = value;
+            }
         }
 
         private DomainArgs mArgs;
@@ -36,8 +52,29 @@ namespace Glue4Net
 
         protected void OnChange(FileWatcher e)
         {
-            UnLoad();
-            Load();
+            try
+            {
+                UnLoad();
+                Load();
+                if (Log != null)
+                {
+                    Log.Error("Update {0} restart appdomain success!", AppName);
+                }
+
+            }
+            catch (Exception e_)
+            {
+                if (Log != null)
+                {
+                    Log.Error("Update {0} restart appdomain error {1}!", AppName, e_.Message);
+                }
+            }
+        }
+
+        public DomainStatus Status
+        {
+            get;
+            set;
         }
 
         public string AppName
@@ -84,7 +121,8 @@ namespace Glue4Net
                 mLoader.AppName = AppName;
                 mLoader.LoadAssembly(AppPath);
                 mLoader.Load();
-                Log.Error("load {0} appdomain success!", AppName);
+                Log.Info("load {0} appdomain success!", AppName);
+                Status = DomainStatus.Start;
             }
             catch (Exception e_)
             {
@@ -105,6 +143,7 @@ namespace Glue4Net
                     mLoader.UnLoad();
                     System.Threading.Thread.Sleep(1000);
                     AppDomain.Unload(mAppDomain);
+                    Status = DomainStatus.Stop;
                 }
                 catch (Exception e_)
                 {
@@ -115,6 +154,7 @@ namespace Glue4Net
                 }
                 mLoader = null;
             }
+            
         }
 
         public object CreateProxyObject(string name)

@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Beetle">
-      <HintPath>E:\project\BeetleLib\4.0\Beetle.dll</HintPath>
+      <HintPath>..\..\..\BeetleLib\4.0\Beetle.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a">
       <SpecificVersion>False</SpecificVersion>
