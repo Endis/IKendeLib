@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Beetle.Tracker.TestImpl
 {
-    public class Group
+    [Serializable]
+    public class Group:MarshalByRefObject
     {
         public string Name { get; set; }
 

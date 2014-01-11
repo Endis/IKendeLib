@@ -10,7 +10,8 @@ namespace Beetle.Tracker
         void FromHeaders(IDictionary<string, string> header);
         IDictionary<string, string> ToHeaders();
     }
-    public class Properties : IProperties
+    [Serializable]
+    public class Properties :MarshalByRefObject, IProperties
     {
 
         public Properties()

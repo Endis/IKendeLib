@@ -52,7 +52,7 @@ namespace Beetle.Tracker
         public void Load()
         {
             if (Log != null)
-                Log.Info("Tracker Factory load Tracker ...");
+                Log.Info("Tracker Factory Tracker Loding...");
             foreach (string item in System.IO.Directory.GetDirectories(mTrackerPath))
             {
 
@@ -65,9 +65,10 @@ namespace Beetle.Tracker
                     args.UpdateWatch = true;
                     args.WatchFilter = new string[] { "*.dll", "*.xml", "*.config", ".ini" };
                     Glue4Net.DomainAdapter domain = new Glue4Net.DomainAdapter(item, info.Name, args);
+                    domain.Log = Log;
                     mDomains[info.Name] = domain;
                     if (Log != null)
-                        Log.Info("Load Tracker {0} Path:{1}", info.Name, item);
+                        Log.Info("Created Tracker {0} Path:{1}", info.Name, item);
                 }
             }
         }

@@ -5,13 +5,10 @@ using System.Text;
 
 namespace Beetle.Tracker
 {
-    public class Log4NetEventLog:MarshalByRefObject, Glue4Net.IEventLog
+    public class Log4NetEventLog
     {
 
-        public override object InitializeLifetimeService()
-        {
-            return null;
-        }
+      
 
         public void Track(string value)
         {

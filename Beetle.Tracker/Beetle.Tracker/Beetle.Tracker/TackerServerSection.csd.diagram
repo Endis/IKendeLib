@@ -30,7 +30,7 @@
         <elementListCompartment Id="60a2f4ce-3a80-4bfe-a49a-ba8883034d14" absoluteBounds="5.0150000000000006, 2.2924670410156249, 2.5949999999999998, 0.247467041015625" name="ElementProperties" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </configurationElementCollectionShape>
-    <configurationElementCollectionHasItemTypeConnector edgePoints="[(6.3125 : 2.63993408203125); (6.3125 : 3.57348673502604); (3.625 : 3.57348673502604)]" fixedFrom="Algorithm" fixedTo="Algorithm" TargetRelationshipDomainClassId="c2b30fd0-a8b8-4b9f-abe5-fd8447c1f53e">
+    <configurationElementCollectionHasItemTypeConnector edgePoints="[(6.3125 : 2.63993408203125); (6.3125 : 3.57348673502604); (3.625 : 3.57348673502604)]" fixedFrom="NotFixed" fixedTo="NotFixed" TargetRelationshipDomainClassId="c2b30fd0-a8b8-4b9f-abe5-fd8447c1f53e">
       <relativeChildShapes />
       <nodes>
         <configurationElementCollectionShapeMoniker Id="b79f167d-8deb-4cb9-8e48-c42255824197" />

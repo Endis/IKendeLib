@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Beetle.Tracker
 {
+    [Serializable]
     public class AppHost
     {
         public string Host

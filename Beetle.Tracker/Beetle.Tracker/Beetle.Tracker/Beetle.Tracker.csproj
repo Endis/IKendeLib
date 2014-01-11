@@ -69,8 +69,8 @@
     </Compile>
     <Compile Include="TrackerClient.cs" />
     <Compile Include="TrackerException.cs" />
-    <Compile Include="TrackerFactory.cs" />
     <Compile Include="TrackerHost.cs" />
+    <Compile Include="TrackerInfo.cs" />
     <Compile Include="TrackerSection1.csd.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,10 +83,6 @@
     <ProjectReference Include="..\..\..\Beetle.HttpExtend\Beetle.HttpExtend\Beetle.HttpExtend\Beetle.HttpExtend.csproj">
       <Project>{f5133e4e-9744-44f4-ac70-cbb90b7c5352}</Project>
       <Name>Beetle.HttpExtend</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Glue4Net\Glue4Net\Glue4Net.csproj">
-      <Project>{B4D38921-4E4F-45A4-8180-B8E51F202650}</Project>
-      <Name>Glue4Net</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

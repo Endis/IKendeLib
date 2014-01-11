@@ -25,7 +25,7 @@ namespace Beetle.Tracker
             mHosts = hosts.ToArray();
             foreach (TrackerHost item in mHosts)
             {
-                item.Client.Connect<Beetle.Clients.TcpSyncChannel<HttpExtend.HttpPacket>>();
+                item.Client.Connect<Beetle.Clients.SyncChannel<HttpExtend.HttpPacket>>();
             }
 
             foreach (PropertyConfig p in ts.Properties)
@@ -47,7 +47,7 @@ namespace Beetle.Tracker
             mHosts = hosts;
             foreach (TrackerHost item in mHosts)
             {
-                item.Client.Connect<Beetle.Clients.TcpSyncChannel<HttpExtend.HttpPacket>>();
+                item.Client.Connect<Beetle.Clients.SyncChannel<HttpExtend.HttpPacket>>();
             }
             mTrackTime = 1000;
             mTimer = new System.Threading.Timer(OnTarck, null, mTrackTime, mTrackTime);
@@ -102,7 +102,7 @@ namespace Beetle.Tracker
                     {
                         if (item.Client.Available)
                         {
-                            using (Beetle.Clients.TcpSyncNode.Connection connection
+                            using (Beetle.Clients.SyncNode.Connection connection
                             = item.Client.Pop())
                             {
                                 HttpExtend.HttpHeader command = Protocol.Register(mAppName, properties);
@@ -112,10 +112,6 @@ namespace Beetle.Tracker
                                     Utils.Error<AppToTracker<T, P>>("Register Track {0} Error {1}", item.IPAddress, result.ActionDetail);
                                 }
                             }
-                        }
-                        else
-                        {
-                            item.Client.Verify();
                         }
                     }
                     catch (Exception e__)
@@ -144,7 +140,7 @@ namespace Beetle.Tracker
                 {
                     if (item.Client.Available)
                     {
-                        using (Beetle.Clients.TcpSyncNode.Connection connection
+                        using (Beetle.Clients.SyncNode.Connection connection
                         = item.Client.Pop())
                         {
                            

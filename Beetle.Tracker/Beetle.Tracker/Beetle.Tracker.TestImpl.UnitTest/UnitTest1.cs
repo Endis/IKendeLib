@@ -36,9 +36,9 @@ namespace Beetle.Tracker.TestImpl.UnitTest
             properties.Host = "192.168.0.122";
             properties.Port = "8088";
             handler.Register(properties);
-            Group group = (Group)handler.GetInfo(new TestProperties { Group = "TEST" });
-            Assert.AreEqual("T1", group.Nodes[0].Name);
-            Assert.AreEqual("T2", group.Nodes[1].Name);
+            //Group group = (Group)handler.GetInfo(new TestProperties { Group = "TEST" });
+            //Assert.AreEqual("T1", group.Nodes[0].Name);
+            //Assert.AreEqual("T2", group.Nodes[1].Name);
         }
         [TestMethod]
         public void GetHost()

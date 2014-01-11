@@ -9,7 +9,7 @@ namespace Beetle.Tracker.TestImpl
     {
         public string Name
         {
-            get { return "Test Tracker Module"; }
+            get { return "<Test Tracker>"; }
         }
 
         private TestTackerHandler mTrackerHandler = new TestTackerHandler();

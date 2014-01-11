@@ -117,7 +117,7 @@ namespace Glue4Net
                     loadertype.FullName);
                 if (mArgs != null)
                     mLoader.CompilerFiles = mArgs.Compiler;
-                mLoader.Log = Log;
+                mLoader.SetLog(Log);
                 mLoader.AppName = AppName;
                 mLoader.LoadAssembly(AppPath);
                 mLoader.Load();

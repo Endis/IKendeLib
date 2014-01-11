@@ -12,22 +12,22 @@ namespace Beetle.Tracker
             TrackerClientSection tcs = (TrackerClientSection)System.Configuration.ConfigurationManager.GetSection(section);
             if (tcs == null)
                 throw new TrackerException(string.Format("{0} Tracker Client Section notfound!", section));
-            mNode = new Clients.TcpSyncNode(tcs.Host, tcs.Port, tcs.Connections);
-            mNode.Connect<Beetle.Clients.TcpSyncChannel<HttpExtend.HttpPacket>>();
+            mNode = new Clients.SyncNode(tcs.Host, tcs.Port, tcs.Connections);
+            mNode.Connect<Beetle.Clients.SyncChannel<HttpExtend.HttpPacket>>();
             mAppName = tcs.AppName;
         }
         public TrackerClient(string host, int port,string appName,int connecitons=5)
         {
-            mNode = new Clients.TcpSyncNode(host, port, connecitons);
-            mNode.Connect<Beetle.Clients.TcpSyncChannel<HttpExtend.HttpPacket>>();
+            mNode = new Clients.SyncNode(host, port, connecitons);
+            mNode.Connect<Beetle.Clients.SyncChannel<HttpExtend.HttpPacket>>();
             mAppName = appName;
         }
 
         private string mAppName;
 
-        private Beetle.Clients.TcpSyncNode mNode;
+        private Beetle.Clients.SyncNode mNode;
 
-        public Beetle.Clients.TcpSyncNode NetNode
+        public Beetle.Clients.SyncNode NetNode
         {
             get
             {

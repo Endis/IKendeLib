@@ -17,6 +17,8 @@ namespace Glue4Net
 
         private List<Assembly> mCompilerAssembly = new List<Assembly>();
 
+        private IEventLog mLog;
+
         public AssemblyLoader()
         {
             AppDomain.CurrentDomain.UnhandledException += OnUnLoaderror;
@@ -51,8 +53,16 @@ namespace Glue4Net
 
         public IEventLog Log
         {
-            get;
-            set;
+            get
+            {
+                return mLog;
+            }
+        }
+
+        public void SetLog(IEventLog log)
+        {
+            mLog = log;
+            Context.Current.Log = log;
         }
 
         public bool CompilerFiles

@@ -18,15 +18,15 @@ namespace Beetle.Tracker
             set;
         }
 
-        private Beetle.Clients.TcpSyncNode mClient;
+        private Beetle.Clients.SyncNode mClient;
 
-        public Beetle.Clients.TcpSyncNode Client
+        public Beetle.Clients.SyncNode Client
         {
             get
             {
                 if (mClient == null)
                 {
-                    mClient = new Clients.TcpSyncNode(IPAddress, Port, 2);
+                    mClient = new Clients.SyncNode(IPAddress, Port, 2);
                     mClient.DetectTime = 5;
                     
                 }

@@ -18,6 +18,6 @@ namespace Beetle.Tracker
 
          IProperties Register(IProperties properties);
 
-         object GetInfo(IProperties properties);
+         TrackerInfo GetInfo(IProperties properties);
     }
 }

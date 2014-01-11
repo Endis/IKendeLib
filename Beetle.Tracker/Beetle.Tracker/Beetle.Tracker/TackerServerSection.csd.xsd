@@ -10,13 +10,13 @@
 <xs:schema xmlns:tns="urn:Beetle.Tracker" elementFormDefault="qualified" targetNamespace="urn:Beetle.Tracker" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:element name="trackerServerSection" type="tns:Beetle.Tracker.TrackerServerSectionCT" />
 	<xs:complexType name="Beetle.Tracker.TrackerServerSectionCT">
-		<xs:choice minOccurs="0" maxOccurs="unbounded">
+		<xs:sequence>
 			<xs:element minOccurs="1" name="trackers" type="tns:Beetle.Tracker.AppTrackerConfigCollectionCT">
 				<xs:annotation>
 					<xs:documentation>The Trackers.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-		</xs:choice>
+		</xs:sequence>
 		<xs:attribute name="host" use="optional" type="xs:string">
 			<xs:annotation>
 				<xs:documentation>The Host.</xs:documentation>
@@ -29,6 +29,8 @@
 		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="Beetle.Tracker.AppTrackerConfigCT">
+		<xs:sequence>
+		</xs:sequence>
 		<xs:attribute name="name" use="required" type="xs:string">
 			<xs:annotation>
 				<xs:documentation>The Name.</xs:documentation>
@@ -41,22 +43,12 @@
 		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="Beetle.Tracker.AppTrackerConfigCollectionCT">
-		<xs:choice minOccurs="0" maxOccurs="unbounded">
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="clear" type="tns:Beetle.Tracker.AppTrackerConfigCollectionClearCT" />
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="remove" type="tns:Beetle.Tracker.AppTrackerConfigCollectionRemoveCT" />
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="add" type="tns:Beetle.Tracker.AppTrackerConfigCT">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="appTrackerConfig" type="tns:Beetle.Tracker.AppTrackerConfigCT">
 				<xs:annotation>
 					<xs:documentation>The AppTrackerConfig Configuration Element.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-		</xs:choice>
+		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="Beetle.Tracker.AppTrackerConfigCollectionRemoveCT">
-		<xs:attribute name="name" use="required" type="xs:string">
-			<xs:annotation>
-				<xs:documentation>The Name.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-	</xs:complexType>
-	<xs:complexType name="Beetle.Tracker.AppTrackerConfigCollectionClearCT" />
 </xs:schema>

@@ -49,14 +49,17 @@ namespace Beetle.Tracker.TestImpl
             }
         }
 
-        public object GetInfo(IProperties properties)
+        public TrackerInfo GetInfo(IProperties properties)
         {
+            TrackerInfo result = new TrackerInfo();
+            result.TypeName = "Beetle.Tracker.TestImpl.Group,Beetle.Tracker.TestImpl";
             TestProperties tp = new TestProperties();
             tp.FromHeaders(properties.ToHeaders());
             Group group = mGroups.Find(e => e.Name == tp.Group);
             if (group == null)
-                return new Group();
-            return group;
+                return null;
+            result.Data= Formater.ToStringValue(group);
+            return result;
         }
 
         public override object InitializeLifetimeService()
