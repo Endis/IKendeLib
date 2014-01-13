@@ -7,9 +7,6 @@ namespace Glue4Net
 {
     public interface IEventLog
     {
-        void Track(string value);
-
-        void Track(string formater, params object[] data);
 
         void Debug(string value);
 

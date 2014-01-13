@@ -102,7 +102,7 @@ namespace Glue4Net
                 catch (Exception e_)
                 {
                     if (Log != null)
-                        Log.Error("domain [{0}] load {1} assembly error:{3}.", AppName, item.Name, e_.Message);
+                        Log.Error("<{0}> domain load {1} assembly error:{3}.", AppName, item.Name, e_.Message);
                 }
             }
             if (CompilerFiles)
@@ -119,14 +119,15 @@ namespace Glue4Net
             {
                 try
                 {
+                    module.Log = Log;
                     module.Load();
                     if (Log != null)
-                        Log.Info("{0} App {1} module load success!", AppName, module.Name);
+                        Log.Info("<{0}> domain load <{1}> module success!", AppName, module.Name);
                 }
                 catch (Exception e_)
                 {
                     if (Log != null)
-                        Log.Info("{0} App {1} module load error {2}!", AppName, module.Name, e_.Message);
+                        Log.Error("<{0}> domain load <{1}> module error {2}!", AppName, module.Name, e_.Message);
                 }
             }
         }
@@ -140,12 +141,12 @@ namespace Glue4Net
                 {
                     module.UnLoad();
                     if (Log != null)
-                        Log.Info("{0} App {1} module unload success!", AppName, module.Name);
+                        Log.Info("<{0}> domain unload <{1}> module success!", AppName, module.Name);
                 }
                 catch (Exception e_)
                 {
                     if (Log != null)
-                        Log.Info("{0} App {1} module unload error {2}!", AppName, module.Name, e_.Message);
+                        Log.Error("<{0}> domain unload <{1}>module error {2}!", AppName, module.Name, e_.Message);
                 }
             }
         }
@@ -158,7 +159,7 @@ namespace Glue4Net
             if (Log != null)
             {
                 Exception error = (Exception)e.ExceptionObject;
-                Log.Error("{0} UnhandledException error {1} {2}", AppName, error.Message, error.StackTrace);
+                Log.Error("<{0}> domain UnhandledException error {1} {2}", AppName, error.Message, error.StackTrace);
             }
 
         }
@@ -190,15 +191,23 @@ namespace Glue4Net
             {
                 try
                 {
+                    Log.Info("<{0}> domain compiling .vb files ...", AppName);
                     Assembly assembly = mFileCompiler.CreateAssembly(files, mRefAssembly);
                     mCompilerAssembly.Add(assembly);
+                    foreach (Type type in assembly.GetTypes())
+                    {
+                        if (type.GetInterface("Glue4Net.IAppModule") != null)
+                        {
+                            mModules.Add((IAppModule)Activator.CreateInstance(type));
+                        }
+                    }
                     if (Log != null)
-                        Log.Info("compiler .cs files success");
+                        Log.Info("<{0}> domain compiler .vb files success",AppName);
                 }
                 catch (Exception e_)
                 {
                     if (Log != null)
-                        Log.Info("compiler .cs files error {1}", e_.Message);
+                        Log.Error("<{1}> compiler .vb files error {0}", e_.Message,AppName);
                 }
             }
         }
@@ -210,15 +219,23 @@ namespace Glue4Net
             {
                 try
                 {
+                    Log.Info("<{0}> domain compiling .cs files ...", AppName);
                     Assembly assembly = mFileCompiler.CreateAssembly(files, mRefAssembly);
+                    foreach (Type type in assembly.GetTypes())
+                    {
+                        if (type.GetInterface("Glue4Net.IAppModule") != null)
+                        {
+                            mModules.Add((IAppModule)Activator.CreateInstance(type));
+                        }
+                    }
                     mCompilerAssembly.Add(assembly);
                     if (Log != null)
-                        Log.Info("compiler .vb files success");
+                        Log.Info("<{0}> domain compiler .cs files success", AppName);
                 }
                 catch (Exception e_)
                 {
                     if (Log != null)
-                        Log.Info("compiler .vb files error {1}", e_.Message);
+                        Log.Error("<{1}> compiler .cs files error {0}", e_.Message, AppName);
                 }
             }
         }

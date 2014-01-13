@@ -54,11 +54,15 @@ namespace Glue4Net
         {
             try
             {
+                if (Log != null)
+                {
+                    Log.Info("<{0}> on updating!", AppName);
+                }
                 UnLoad();
                 Load();
                 if (Log != null)
                 {
-                    Log.Error("Update {0} restart appdomain success!", AppName);
+                    Log.Info("<{0}> domain restart success!", AppName);
                 }
 
             }
@@ -66,7 +70,7 @@ namespace Glue4Net
             {
                 if (Log != null)
                 {
-                    Log.Error("Update {0} restart appdomain error {1}!", AppName, e_.Message);
+                    Log.Error("<{0}> domain update error {1}!", AppName, e_.Message);
                 }
             }
         }
@@ -102,6 +106,7 @@ namespace Glue4Net
         {
             try
             {
+                Log.Info("<{0}> domain creating ...", AppName);
                 Type loadertype = typeof(AssemblyLoader);
                 AppDomainSetup setup = new AppDomainSetup();
                 setup.ApplicationName = AppName;
@@ -121,14 +126,14 @@ namespace Glue4Net
                 mLoader.AppName = AppName;
                 mLoader.LoadAssembly(AppPath);
                 mLoader.Load();
-                Log.Info("load {0} appdomain success!", AppName);
+                Log.Info("<{0}> domain created!", AppName);
                 Status = DomainStatus.Start;
             }
             catch (Exception e_)
             {
                 if (Log != null)
                 {
-                    Log.Error("load {0} appdomain error {1}!", AppName,e_.Message);
+                    Log.Error("<{0}> domain Creating error {1}!", AppName, e_.Message);
                 }
             }
         }
@@ -140,16 +145,18 @@ namespace Glue4Net
             {
                 try
                 {
+                    Log.Info("<{0}> domain unloading ...", AppName);
                     mLoader.UnLoad();
                     System.Threading.Thread.Sleep(1000);
                     AppDomain.Unload(mAppDomain);
                     Status = DomainStatus.Stop;
+                    Log.Info("<{0}> domain unloaded!", AppName);
                 }
                 catch (Exception e_)
                 {
                     if (Log != null)
                     {
-                        Log.Error("unload {0} appdomain error {1}!", AppName,e_.Message);
+                        Log.Error("<{0}> domain unload error {1}!", AppName,e_.Message);
                     }
                 }
                 mLoader = null;
